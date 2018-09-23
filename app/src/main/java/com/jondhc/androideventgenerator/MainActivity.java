@@ -21,18 +21,18 @@ public class MainActivity extends AppCompatActivity {
         CognitoCachingCredentialsProvider cognitoProvider = new CognitoCachingCredentialsProvider(
                 this.getApplicationContext(), "us-east-1:9d253d63-aec6-441f-926f-88980f7d4b5b", Regions.US_EAST_1);
 
-// Create LambdaInvokerFactory, to be used to instantiate the Lambda proxy.
+        // Create LambdaInvokerFactory, to be used to instantiate the Lambda proxy.
         LambdaInvokerFactory factory = new LambdaInvokerFactory(this.getApplicationContext(),
                 Regions.US_EAST_1, cognitoProvider);
 
-// Create the Lambda proxy object with a default Json data binder.
-// You can provide your own data binder by implementing
-// LambdaDataBinder.
+        // Create the Lambda proxy object with a default Json data binder.
+        // You can provide your own data binder by implementing
+        // LambdaDataBinder.
         final MyInterface myInterface = factory.build(MyInterface.class);
 
         RequestClass request = new RequestClass("Daniel", "Herrejón");
-// The Lambda function invocation results in a network call.
-// Make sure it is not called from the main thread.
+        // The Lambda function invocation results in a network call.
+        // Make sure it is not called from the main thread.
         new AsyncTask<RequestClass, Void, ResponseClass>() {
             @Override
             protected ResponseClass doInBackground(RequestClass... params) {
